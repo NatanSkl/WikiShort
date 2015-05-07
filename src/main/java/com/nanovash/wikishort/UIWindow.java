@@ -11,6 +11,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -22,7 +23,7 @@ public class UIWindow extends JFrame {
 	JPanel contentPane = new JPanel();
 	JTextField field = new JTextField();
 	JScrollPane pane = new JScrollPane();
-    JTextArea data = new JTextArea();
+	JTextArea data = new JTextArea();
 	JList<String> list = new JList<>();
 	LinkedHashMap<String, String> links = new LinkedHashMap<>();
 
@@ -41,9 +42,7 @@ public class UIWindow extends JFrame {
 		final JButton search = new JButton("Search");
         search.addActionListener(e -> {
 			CustomThread.t.search = WikiShort.window.field.getText().trim().toLowerCase();
-			synchronized (CustomThread.t) {
-				CustomThread.t.notify();
-			}
+			wakeThread();
 		});
 		contentPane.add(search, BorderLayout.SOUTH);
 
@@ -53,14 +52,23 @@ public class UIWindow extends JFrame {
 		contentPane.add(pane, BorderLayout.CENTER);
 		pane.setViewportView(data);
 
+		JButton left = createButton("\u21E6");
+		JButton right = createButton("\u21E8");
+		left.addActionListener(e -> {
+			CustomThread.t.hm.goBack();
+			wakeThread();
+		});
+		right.addActionListener(e -> {
+			CustomThread.t.hm.goForward();
+			wakeThread();
+		});
+
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2 && list.getSelectedIndex() != 0) {
-					field.setText(links.get(CustomThread.t.search = list.getSelectedValue()));
-					synchronized (CustomThread.t) {
-						CustomThread.t.notify();
-					}
+					field.setText(CustomThread.t.search = links.get(list.getSelectedValue()));
+					wakeThread();
 				}
 			}
 		});
@@ -72,5 +80,23 @@ public class UIWindow extends JFrame {
 					search.doClick();
 			}
 		});
+	}
+
+	public JButton createButton(String s) {
+		JButton button = new JButton(s);
+		button.setPreferredSize(new Dimension(50, 0));
+		button.setFont(button.getFont().deriveFont(15f));
+		button.setFocusPainted(false);
+		if(s.equals("\u21E6"))
+			contentPane.add(button, BorderLayout.WEST);
+		else
+			contentPane.add(button, BorderLayout.EAST);
+		return button;
+	}
+
+	public void wakeThread() {
+		synchronized (CustomThread.t) {
+			CustomThread.t.notify();
+		}
 	}
 }
