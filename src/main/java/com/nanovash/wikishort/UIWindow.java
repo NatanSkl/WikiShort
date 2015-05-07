@@ -22,7 +22,7 @@ import java.util.LinkedHashMap;
 public class UIWindow extends JFrame {
 
 	JPanel contentPane = new JPanel(),
-            searchBar = new JPanel(),
+			searchBar = new JPanel(),
 			buttons = new JPanel();
 	JTextField field = new JTextField();
 	JScrollPane pane = new JScrollPane();
@@ -31,7 +31,7 @@ public class UIWindow extends JFrame {
 	LinkedHashMap<String, String> links = new LinkedHashMap<>();
 
 	public UIWindow() {
-        setTitle("WikiShort");
+		setTitle("WikiShort");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -43,11 +43,11 @@ public class UIWindow extends JFrame {
 		field.setColumns(10);
 		searchBar.setLayout(new BorderLayout(0, 0));
 		searchBar.add(field, BorderLayout.CENTER);
-        searchBar.add(buttons, BorderLayout.WEST);
-        buttons.setLayout(new GridLayout(1, 2));
+		searchBar.add(buttons, BorderLayout.WEST);
+		buttons.setLayout(new GridLayout(1, 2));
 
 		final JButton search = new JButton("Search");
-        search.addActionListener(e -> {
+		search.addActionListener(e -> {
 			CustomThread.t.search = WikiShort.window.field.getText().trim().toLowerCase();
 			wakeThread();
 		});
@@ -94,7 +94,7 @@ public class UIWindow extends JFrame {
 		button.setPreferredSize(new Dimension(50, 0));
 		button.setFont(button.getFont().deriveFont(15f));
 		button.setFocusPainted(false);
-		if(s.equals("\u21E6"))
+		if (s.equals("\u21E6"))
 			buttons.add(button);
 		else
 			buttons.add(button);
