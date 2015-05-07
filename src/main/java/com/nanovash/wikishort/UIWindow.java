@@ -94,10 +94,7 @@ public class UIWindow extends JFrame {
 		button.setPreferredSize(new Dimension(50, 0));
 		button.setFont(button.getFont().deriveFont(15f));
 		button.setFocusPainted(false);
-		if (s.equals("\u21E6"))
-			buttons.add(button);
-		else
-			buttons.add(button);
+		buttons.add(button);
 		return button;
 	}
 
