@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -20,8 +21,9 @@ import java.util.LinkedHashMap;
 
 public class UIWindow extends JFrame {
 
-	JPanel contentPane = new JPanel();
-	JPanel searchBar = new JPanel();
+	JPanel contentPane = new JPanel(),
+            searchBar = new JPanel(),
+			buttons = new JPanel();
 	JTextField field = new JTextField();
 	JScrollPane pane = new JScrollPane();
 	JTextArea data = new JTextArea();
@@ -41,6 +43,8 @@ public class UIWindow extends JFrame {
 		field.setColumns(10);
 		searchBar.setLayout(new BorderLayout(0, 0));
 		searchBar.add(field, BorderLayout.CENTER);
+        searchBar.add(buttons, BorderLayout.WEST);
+        buttons.setLayout(new GridLayout(1, 2));
 
 		final JButton search = new JButton("Search");
         search.addActionListener(e -> {
@@ -91,9 +95,9 @@ public class UIWindow extends JFrame {
 		button.setFont(button.getFont().deriveFont(15f));
 		button.setFocusPainted(false);
 		if(s.equals("\u21E6"))
-			searchBar.add(button, BorderLayout.WEST);
+			buttons.add(button);
 		else
-			searchBar.add(button, BorderLayout.EAST);
+			buttons.add(button);
 		return button;
 	}
 

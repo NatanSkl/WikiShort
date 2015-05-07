@@ -45,7 +45,7 @@ public class CustomThread extends Thread {
                 setError("No value to search, please enter a value");
                 continue;
             }
-            if(lastSearch.equalsIgnoreCase(search))
+            if(lastSearch != null && lastSearch.equalsIgnoreCase(search))
                 continue;
             setText("");
             HtmlPage page = null;
