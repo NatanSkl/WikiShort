@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 public class UIWindow extends JFrame {
 
 	JPanel contentPane = new JPanel();
+	JPanel searchBar = new JPanel();
 	JTextField field = new JTextField();
 	JScrollPane pane = new JScrollPane();
 	JTextArea data = new JTextArea();
@@ -36,8 +37,10 @@ public class UIWindow extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		setContentPane(contentPane);
 
-		contentPane.add(field, BorderLayout.NORTH);
+		contentPane.add(searchBar, BorderLayout.NORTH);
 		field.setColumns(10);
+		searchBar.setLayout(new BorderLayout(0, 0));
+		searchBar.add(field, BorderLayout.CENTER);
 
 		final JButton search = new JButton("Search");
         search.addActionListener(e -> {
@@ -88,9 +91,9 @@ public class UIWindow extends JFrame {
 		button.setFont(button.getFont().deriveFont(15f));
 		button.setFocusPainted(false);
 		if(s.equals("\u21E6"))
-			contentPane.add(button, BorderLayout.WEST);
+			searchBar.add(button, BorderLayout.WEST);
 		else
-			contentPane.add(button, BorderLayout.EAST);
+			searchBar.add(button, BorderLayout.EAST);
 		return button;
 	}
 
