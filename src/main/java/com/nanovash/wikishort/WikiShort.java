@@ -11,6 +11,7 @@ public class WikiShort {
 			try {
 				window = new UIWindow();
 				window.setVisible(true);
+				window.field.requestFocusInWindow();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

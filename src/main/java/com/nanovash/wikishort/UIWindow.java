@@ -47,6 +47,7 @@ public class UIWindow extends JFrame {
 		buttons.setLayout(new GridLayout(1, 2));
 
 		final JButton search = new JButton("Search");
+		search.setFocusPainted(false);
 		search.addActionListener(e -> {
 			CustomThread.t.search = WikiShort.window.field.getText().trim().toLowerCase();
 			wakeThread();

@@ -119,7 +119,7 @@ public class CustomThread extends Thread {
 		WikiShort.window.pane.setViewportView(WikiShort.window.data);
 		WikiShort.window.data.setForeground(error ? Color.RED : Color.BLACK);
 		WikiShort.window.data.setText(text);
-		if (!text.equals(""))
+		if (!(text.equals("") || (lastSearch.equals("") && search.equals(""))))
 			finish();
 	}
 
